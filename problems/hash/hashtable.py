@@ -1,3 +1,4 @@
+"""
 # %% [markdown]
 # # Hash Table
 
@@ -6,7 +7,7 @@
 
 # %% [markdown]
 # ### Dictionary:
-# 
+#
 # The following code blocks walks through the basics of implementing a dictionary in python, which in essence is a hash table. First, we initialize an empty dictionary as such:
 
 # %%
@@ -33,12 +34,12 @@ print Dict['A'] #Access value given the key
 print "All Keys:"
 for i in Dict.keys():
     print i
-#Loop through all the values in the dictionary:   
+#Loop through all the values in the dictionary:
 print "\nAll Values:"
 for j in Dict.values():
     print j
-    
-#Loop through all key/value pairs in the dictionary:    
+
+#Loop through all key/value pairs in the dictionary:
 print "\nKey/Value Pairs:"
 for k,v in Dict.items():
     print k,':',v
@@ -50,18 +51,18 @@ for k,v in Dict.items():
 key = ['A','B','C']
 value = ["Hello World",25,[1,2,3,4]]
 dic = {k:v for k,v in zip(key,value)} #Dictionary {}
-print "Hash Table: \n%s" % dic 
+print "Hash Table: \n%s" % dic
 
 # %% [markdown]
 # ### Hash Tables Explained
-# 
+#
 # Hash tables are a collection of items that are stored in a way that allows for easy access in finding the item by it's hash value. The "slot" is referred as the position where the item in the hash table is stored. The hash function maps and item and the slot where the corresponding item belongs in the hash table. The hash function will take any item in the collection and return an integer; each slot contains an item and is referenced by an integer, starting at 0 and goes to n-1. For numerical values, one hash function example is known as the "remainder method", `item % size = remainder`. This takes the item, say for example 25, and divides it by the size of the table (i.e. 4). Divide 25 by 4 equals 6.25. Therefore the remainder rounds up to 3 and thus will be the hash value for 25. Here's an example of a table size = 11 (i.e. 0-10) and the items corresponding hash value using the remainder method. Right away you may be thinking that this method only works if each item maps to a unique location in the hash table. For instance, if an item is added to the hash table and it's value is 31, well 33%11 = 0, but we already have an item with the hash value of 0. This is an instance known as "collision", which creates a problem for the hashing technique. This will be discussed in the following section.
-# 
-# 
+#
+#
 # ![Screen Shot 2016-08-11 at 3.38.40 PM.png](https://udacity-github-sync-content.s3.amazonaws.com/_imgs/26272/1470947930/Screen_Shot_2016-08-11_at_3.38.40_PM.png)
-# 
-# 
-# We can create hash function in python for both character-based items (i.e. strings) or numerical values. Let's look at character-based items first. Suppose we have the string "python", we can use the function `ord()` to get the [ASCII](https://en.wikipedia.org/wiki/ASCII) value of each character. Implementing a "for" loop, we can add up the values of each char and use the remainder method to get a hash value. There are a number of additional ways to compute hash values for items in a given collection. Below is one example; note the usage of the positional value (i) as a weighting factor when computing the unique hash value. 
+#
+#
+# We can create hash function in python for both character-based items (i.e. strings) or numerical values. Let's look at character-based items first. Suppose we have the string "python", we can use the function `ord()` to get the [ASCII](https://en.wikipedia.org/wiki/ASCII) value of each character. Implementing a "for" loop, we can add up the values of each char and use the remainder method to get a hash value. There are a number of additional ways to compute hash values for items in a given collection. Below is one example; note the usage of the positional value (i) as a weighting factor when computing the unique hash value.
 
 # %%
 #Characters:
@@ -86,21 +87,21 @@ def hashing(integer,size):
 hashing(15692,10)
 
 # %% [markdown]
-# ### Hash Table Example 
-# 
+# ### Hash Table Example
+#
 # In the following script, we will explore creating a hash table for a  fictitious group of students and their corresponding university they attend. The array length for this example will be 10. In reality, this would be much longer but the point here is to illustrate when a collision occurs. The following source utilized as a guide for creating the hash table can be found ['here'](https://www.youtube.com/watch?v=9HFbhPscPU0).
 
 # %%
 #Initialize HashTable class:
 class HashTable:
-    
+
     def __init__(self):
-        
+
         self.size = 10 #set size of the array
-        
+
         #initial set every cell to "None", force array to fixed length
-        self.map = [None] * self.size 
-    
+        self.map = [None] * self.size
+
     def _get_hash(self,key): #assigning index to place key/value in
         hash = 0 #intialize to Zero
         for char in key:
@@ -118,31 +119,31 @@ class HashTable:
             self.map[key_hash] = list([key_value])
         else: # if the cell is not empty
         #check if key is already existing and if so, we can just update the value
-            for pair in self.map[key_hash]: 
+            for pair in self.map[key_hash]:
                 if pair[0] == key:
                     pair [1] == value
                     return True
             self.map[key_hash].append(key_value) #if not match, the create a new key
         return True
-    
-    '''Next, get the hash given the key and locate the cell; if the cell is 
+
+    '''Next, get the hash given the key and locate the cell; if the cell is
     not none then iterate through the pairs in the cell and find the value that matched
     the key and return the value, if we don't find the key, return None'''
-    
+
     def get_key_value(self,key):
         key_hash = self._get_hash(key)
         if self.map[key_hash] is not None:
             for pair in self.map[key_hash]:
                 if pair[0] == key:
                     return pair[1]
-                
+
     def print_data(self):
         print "Students:\n"
         for item in self.map:
         #prints out every non None cell in the array
             if item is not None:
                 print(str(item))
-                
+
     def delete_entry(self,key):
         key_hash = self._get_hash(key) #first locate key to get the index
         #check if cell is none
@@ -152,7 +153,7 @@ class HashTable:
         for i in range(0, len(self.map[key_hash])):
             if self.map[key_hash][i][0] == key:
             #when locate the item you want to remove you "pop" the item for the list
-                self.map[key_hash].pop(i) 
+                self.map[key_hash].pop(i)
                 return True
 
 # %% [markdown]
@@ -181,5 +182,4 @@ h.print_data()
 print "\n"
 
 print "Trent Attends the following university: %s" % (h.get_key_value('Trent'))
-
-
+"""
