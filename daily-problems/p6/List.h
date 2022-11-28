@@ -6,8 +6,16 @@
 #define MY_CODING_CHALLENGES_LIST_H
 
 
-class List {
+#include "Element.h"
 
+class XorList {
+public:
+    XorList();
+    void add(int val);
+    int get(int index);
+private:
+    Element* first;
+    Element* last;
 };
 
 

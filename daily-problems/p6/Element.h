@@ -7,7 +7,10 @@
 
 
 class Element {
-
+public:
+    Element(int val);
+    Element* both;
+    int val;
 };
 
 

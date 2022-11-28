@@ -3,3 +3,8 @@
 //
 
 #include "Element.h"
+
+Element::Element(int val) {
+    this->both = nullptr;
+    this->val = val;
+}
