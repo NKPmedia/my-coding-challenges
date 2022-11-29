@@ -7,7 +7,6 @@ For example, the input [3, 4, -1, 1] should give 2. The input [1, 2, 0] should g
 
 You can modify the input array in-place
 """
-import unittest
 from typing import List
 
 
@@ -42,11 +41,3 @@ def first_non_exist(numbers: List) -> int:
         if j != i + 1:
             return i + 1
     return -1
-
-
-class Test(unittest.TestCase):
-
-    def test_cases(self):
-        assert first_non_exist([3, 4, -1, 1]) == 2
-        assert first_non_exist([1, 2, 0]) == 3
-        assert first_non_exist([1, 2, 1, -9, 0, 2]) == 3
