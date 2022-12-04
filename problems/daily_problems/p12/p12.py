@@ -36,7 +36,7 @@ def get_ways(stairs: int, possible_steps: List[int] = [1,2], reset: bool = False
     staircase_ways[stairs] = ways
     return ways
 
-class Test_P9(unittest.TestCase):
+class Test_P12(unittest.TestCase):
     def test_cases(self):
         assert get_ways(4, reset=True) == 5
         assert get_ways(1, reset=True) == 1
